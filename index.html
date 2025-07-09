@@ -6,53 +6,560 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" type="image/png" href="./images/favicon.png" />
 
-  <!-- Put your site title here -->
-  <title>
-    Ming Shan Lee - Portfolio
-  </title>
+  <!-- Enhanced SEO -->
+  <title>Ming-Shan Lee - Data Science Portfolio | Machine Learning & AI Projects</title>
+  <meta name="description" content="Ming-Shan Lee - Passionate Data Scientist specializing in Machine Learning, Deep Learning, and AI. Explore my projects in LLM development, data analysis, and web applications." />
+  <meta name="keywords" content="Ming-Shan Lee, Data Science, Machine Learning, Deep Learning, Python, AI, LLM, Data Analysis, Portfolio, Los Angeles" />
+  <meta name="author" content="Ming-Shan Lee" />
 
-  <meta name="description" content="Passionate Data Enthusiast">
-  <meta name="keywords" content="Ming Shan Lee, Data Science, Data Exploration, Data Visualization, Machine Learning, Python, Excel, HTML, CSS, JavaScript, Flask, MySQL" />
+  <!-- Open Graph tags for social sharing -->
+  <meta property="og:title" content="Ming-Shan Lee - Data Science Portfolio" />
+  <meta property="og:description" content="Passionate Data Scientist specializing in Machine Learning, Deep Learning, and AI projects." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://your-domain.com" />
+  
   <link rel="stylesheet" href="index.css" />
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="./fonts/HKGrotesk-Regular.woff" as="font" type="font/woff" crossorigin />
+  <link rel="preload" href="./fonts/Jost-Regular.ttf" as="font" type="font/ttf" crossorigin />
+  
+  <style>
+    /* Modern Header Design */
+    .header {
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%) !important;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 50, 88, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 50, 88, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(255, 50, 88, 0.08) 0%, transparent 50%);
+      z-index: 1;
+    }
+    
+    .header .row {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .header__text-box {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 0;
+    }
+    
+    .header__text {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      transform: translateY(-38vh);  /* Add this line */
+    }
+    
+    .header__text h1 {
+      font-size: 6rem;
+      margin-bottom: 2rem;
+      margin-top: -4rem;  /* Add this line */
+      background: linear-gradient(135deg, var(--white) 0%, var(--pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+    }
+    
+    .header__subtitle {
+      font-size: 2.4rem;
+      align-items: center;
+      color: var(--white-1);
+      margin-bottom: 1rem;
+      font-weight: 300;
+    }
+    
+    .header__description {
+      font-size: 1.8rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 4rem;
+      line-height: 1.6;
+    }
+
+    /* Enhanced CTA buttons */
+    .header__cta {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    
+    @media(max-width: 600px) {
+      .header__cta {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+      }
+      
+      .header__text h1 {
+        font-size: 4rem;
+      }
+      
+      .header__subtitle {
+        font-size: 2rem;
+      }
+    }
+    
+    .btn--primary {
+      background: linear-gradient(135deg, var(--pink) 0%, #ff4d6d 100%);
+      color: var(--white);
+      border: none;
+      padding: 1.4rem 3rem;
+      font-size: 1.6rem;
+      font-weight: 600;
+      border-radius: 50px;
+      box-shadow: 0 8px 25px rgba(255, 50, 88, 0.3);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .btn--primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(255, 50, 88, 0.4);
+    }
+    
+    .btn--outline {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      color: var(--white);
+      padding: 1.4rem 3rem;
+      font-size: 1.6rem;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn--outline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .btn--outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--pink);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 50, 88, 0.2);
+    }
+    
+    .btn--outline:hover::before {
+      left: 100%;
+    }
+    
+    /* Enhanced floating elements for visual interest */
+    .header__decoration {
+      position: absolute;
+      border: 3px solid rgba(255, 50, 88, 0.4);  /* Increased opacity and thickness */
+      border-radius: 50%;
+      z-index: 1;
+      background: rgba(255, 50, 88, 0.05);  /* Added subtle background */
+      box-shadow: 0 0 20px rgba(255, 50, 88, 0.2);  /* Added glow effect */
+    }
+
+    .header__decoration:nth-child(1) {
+      top: 10%;
+      left: 10%;
+      width: 120px;  /* Increased from 100px */
+      height: 120px;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .header__decoration:nth-child(2) {
+      top: 20%;
+      right: 15%;
+      width: 80px;  /* Increased from 60px */
+      height: 80px;
+      animation: float 8s ease-in-out infinite reverse;
+    }
+
+    .header__decoration:nth-child(3) {
+      bottom: 15%;
+      left: 20%;
+      width: 100px;  /* Increased from 80px */
+      height: 100px;
+      animation: float 7s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+      }
+      50% { 
+        transform: translateY(-25px) rotate(180deg);  /* Added rotation */
+      }
+    }
+    
+    /* Navigation improvements */
+    .nav {
+      padding: 2rem 0;
+      background: transparent !important;
+      backdrop-filter: none;
+      border-bottom: none;
+    }
+    
+    .nav__link {
+      color: var(--white) !important;
+      font-weight: 500;
+      font-size: 1.6rem;
+      position: relative;
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+    }
+    
+    .nav__link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 100%;
+      height: 2px;
+      background: var(--pink);
+      transition: all 0.3s ease;
+    }
+    
+    .nav__link:hover {
+      color: var(--pink) !important;
+    }
+    
+    .nav__link:hover::after {
+      right: 0;
+    }
+
+    /* About Section */
+    .about__content {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    @media(max-width: 900px) {
+      .about__content {
+        flex-direction: column-reverse;
+        align-items: initial;
+        gap: 2rem;
+      }
+    }
+
+    .about__text {
+      flex: 0 0 50%;  /* Changed from 55% to 50% */
+    }
+
+    .about__photo-container {
+      flex: 0 0 45%;  /* Changed from 40% to 45% */
+      display: flex;
+      justify-content: center;
+    }
+
+    .about__photo {
+      width: 100%;
+      max-width: 650px;  /* Increased from 550px */
+      min-width: 500px;  /* Increased from 400px */
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(255, 50, 88, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .about__photo:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 25px 60px rgba(255, 50, 88, 0.5);
+    }
+
+    @media(max-width: 900px) {
+      .about__photo {
+        max-width: 550px;  /* Increased from 450px */
+        min-width: 400px;  /* Increased from 350px */
+      }
+    }
+
+    @media(max-width: 600px) {
+      .about__photo {
+        max-width: 450px;  /* Increased from 400px */
+        min-width: 350px;  /* Increased from 300px */
+      }
+    }
+
+    /* Skills Section */
+    .skills__content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+    }
+
+    .skills__category h3 {
+      color: var(--pink);
+      margin-bottom: 2rem;
+      font-size: 2.2rem;
+    }
+
+    .skills__items {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .skill__item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .skill__name {
+      font-size: 1.6rem;
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .skill__bar {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .skill__progress {
+      height: 100%;
+      background: linear-gradient(90deg, var(--pink), #ff6b88);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    /* Improved accessibility */
+    .skill__item:hover .skill__progress {
+      box-shadow: 0 0 10px rgba(255, 50, 88, 0.5);
+    }
+
+    /* Performance optimization styles */
+    img {
+      object-fit: contain;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Lazy loading placeholder */
+    img[loading="lazy"] {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    img[loading="lazy"].loaded {
+      opacity: 1;
+    }
+  </style>
 </head>
 
 <body>
 
   <!-- ***** Header ***** -->
-
   <header class="header" role="banner" id="top">
+    <!-- Floating decorative elements -->
+    <div class="header__decoration"></div>
+    <div class="header__decoration"></div>
+    <div class="header__decoration"></div>
+    
     <div class="row">
       <nav class="nav" role="navigation">
         <ul class="nav__items">
+          <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
+          <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
           <li class="nav__item"><a href="#work" class="nav__link">Projects</a></li>
-          <li class="nav__item">
-            <a href="#contact" class="nav__link">Contact</a>
-          </li>
+          <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
         </ul>
       </nav>
     </div>
     <div class="header__text-box row">
       <div class="header__text">
         <h1 class="heading-primary">
-          <span>Ming Shan Lee</span>
+          <span>Ming-Shan Lee</span>
         </h1>
-        <!-- Put a small paragraph about yourself -->
-        <p style="font-size:100%">A Data Enthusiast based in Los Angeles, California, USA</p>
-        <a href="#contact" class="btn btn--pink">Get in touch</a>
+        <p class="header__subtitle">Data Scientist</p>
+        <p class="header__description">
+          Passionate about leveraging machine learning and artificial intelligence to solve complex problems and create meaningful impact in Los Angeles, California.
+        </p>
+        <div class="header__cta">
+          <a href="#contact" class="btn btn--outline">Get in touch</a>
+          <a href="./resume/Ming_Shan_Lee_Resume.pdf" class="btn btn--outline" download>
+            <span>📄</span> Download Resume
+          </a>
+        </div>
       </div>
     </div>
   </header>
 
   <main role="main">
 
-    <!-- ***** Work ***** -->
+    <!-- ***** About ***** -->
+    <section class="about" id="about">
+      <div class="row">
+        <h2>About Me</h2>
+        <div class="about__content">
+          <div class="about__text">
+            <p>
+              I'm a passionate Data Scientist with a Master's in Applied Data Science from USC and hands-on experience in production environments. I specialize in developing, optimizing, and deploying machine learning models that drive measurable improvements in operational efficiency and predictive accuracy across industries.
+            </p>
+            <p>
+              My expertise encompasses the entire data science lifecycle—from data mining and feature engineering to model deployment and performance optimization. I'm proficient in Python, SQL, cloud computing platforms, and work with everything from traditional machine learning algorithms to cutting-edge large language models and reinforcement learning.
+            </p>
+            <p>
+              I thrive on transforming raw data into actionable insights and building scalable solutions that deliver real business value. Whether it's solving complex business challenges or pushing the boundaries of AI innovation, I'm always excited to tackle new projects that make a meaningful impact.
+            </p>
+            <p>
+              Currently based in Los Angeles, I'm passionate about leveraging advanced analytics and machine learning to create solutions that bridge the gap between data science theory and practical business applications.
+            </p>
+          </div>
+          <div class="about__photo-container">
+            <img class="about__photo" src="./images/profile-photo.jpg" alt="Ming Shan Lee" />
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- ***** Skills ***** -->
+    <section class="skills" id="skills">
+      <div class="row">
+        <h2>Technical Skills</h2>
+        <div class="skills__content">
+          
+          <div class="skills__category">
+            <h3>Programming Languages</h3>
+            <div class="skill__item">
+              <span class="skill__name">Python</span>
+              <div class="skill__bar">
+                <div class="skill__progress" style="width: 95%"></div> <!-- Keep high - extensive use -->
+              </div>
+            </div>
+            <div class="skill__item">
+              <span class="skill__name">SQL</span>
+              <div class="skill__bar">
+                <div class="skill__progress" style="width: 90%"></div> <!-- High - production experience -->
+              </div>
+            </div>
+            <div class="skill__item">
+              <span class="skill__name">JavaScript</span>
+              <div class="skill__bar">
+                <div class="skill__progress" style="width: 75%"></div> <!-- Reduced - limited to web projects -->
+              </div>
+            </div>
+            <div class="skill__item">
+              <span class="skill__name">HTML/CSS</span>
+              <div class="skill__bar">
+                <div class="skill__progress" style="width: 80%"></div> <!-- Moderate - web development -->
+              </div>
+            </div>
+          </div>
+
+          <div class="skills__category">
+            <h3>Data Science & ML</h3>
+            <div class="skills__items">
+              <div class="skill__item">
+                <span class="skill__name">Scikit-learn</span>
+                <div class="skill__bar">
+                  <div class="skill__progress" style="width: 92%"></div> <!-- High - production use -->
+                </div>
+              </div>
+              <div class="skill__item">
+                <span class="skill__name">Pandas & NumPy</span>
+                <div class="skill__bar">
+                  <div class="skill__progress" style="width: 95%"></div> <!-- Very high - extensive use -->
+                </div>
+              </div>
+              <div class="skill__item">
+                <span class="skill__name">PySpark</span>
+                <div class="skill__bar">
+                  <div class="skill__progress" style="width: 85%"></div> <!-- Add from resume -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skills__category">
+            <h3>Cloud & Data Platforms</h3>
+            <div class="skills__items">
+              <div class="skill__item">
+                <span class="skill__name">Google Cloud Platform</span>
+                <div class="skill__bar">
+                  <div class="skill__progress" style="width: 88%"></div> <!-- High - BigQuery production experience -->
+                </div>
+              </div>
+              <div class="skill__item">
+                <span class="skill__name">BigQuery</span>
+                <div class="skill__bar">
+                  <div class="skill__progress" style="width: 90%"></div> <!-- Very high - Micron internship -->
+                </div>
+              </div>
+              <div class="skill__item">
+                <span class="skill__name">AWS</span>
+                <div class="skill__bar">
+                  <div class="skill__progress" style="width: 75%"></div> <!-- Moderate - listed but less experience -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skills__category">
+            <h3>AI & Advanced ML</h3>
+            <div class="skills__items">
+              <div class="skill__item">
+                <span class="skill__name">Large Language Models</span>
+                <div class="skill__bar">
+                  <div class="skill__progress" style="width: 85%"></div> <!-- High - recent AppWorld project -->
+                </div>
+              </div>
+              <div class="skill__item">
+                <span class="skill__name">Machine Learning</span>
+                <div class="skill__bar">
+                  <div class="skill__progress" style="width: 92%"></div> <!-- Very high - production deployment -->
+                </div>
+              </div>
+              <div class="skill__item">
+                <span class="skill__name">Reinforcement Learning</span>
+                <div class="skill__bar">
+                  <div class="skill__progress" style="width: 80%"></div> <!-- Good - AppWorld project -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ***** Work ***** -->
     <section class="work" id="work">
       <div class="row">
         <h2>My Projects</h2>
         <div class="work__boxes">
-
-          <!-- Each div with the work__box class is a project. -->
 
           <div class="work__box">
             <div class="work__text">
@@ -73,13 +580,13 @@
               </p>
               <div class="work__links">
                 <h4>Visit Site <span>&rarr;</span></h4>
-                <a href="https://github.com/Aragath/Better-Agent-For-AppWorld" title="View GitHub" target="_blank">
-                  <img src="./images/github.svg" class="work__code" alt="GitHub">
+                <a href="https://github.com/Aragath/Better-Agent-For-AppWorld" title="View GitHub" target="_blank" rel="noopener noreferrer">
+                  <img src="./images/github.svg" class="work__code" alt="GitHub" loading="lazy">
                 </a>
               </div>
             </div>
             <div class="work__image-box">
-              <img src="./images/project_RLHF.png" class="work__image" alt="Project Better-Agent-For-AppWorld" style="width: 700px;height: 800px;">
+              <img src="./images/project_RLHF.png" class="work__image" alt="Project Better-Agent-For-AppWorld" style="width: 700px;height: 800px;" loading="lazy">
             </div>
           </div>
 
@@ -102,16 +609,16 @@
               </p>
               <div class="work__links">
                 <h4>Visit Site <span>&rarr;</span></h4>
-                <a href="https://github.com/Atatsuki2000/NBA-Games-Real-Time-Database" title="View Source Code" target="_blank">
-                  <img src="./images/github.svg" class="work__code" alt="GitHub">
+                <a href="https://github.com/Atatsuki2000/NBA-Games-Real-Time-Database" title="View Source Code" target="_blank" rel="noopener noreferrer">
+                  <img src="./images/github.svg" class="work__code" alt="GitHub" loading="lazy">
                 </a>
-                <a href="https://youtu.be/RL7K2AIvAO8?feature=shared&t=953" title="View Demo Video" target="_blank">
-                  <img src="./images/youtube.svg" class="work__code" alt="YouTube">
+                <a href="https://youtu.be/RL7K2AIvAO8?feature=shared&t=953" title="View Demo Video" target="_blank" rel="noopener noreferrer">
+                  <img src="./images/youtube.svg" class="work__code" alt="YouTube" loading="lazy">
                 </a>
               </div>
             </div>
             <div class="work__image-box">
-              <img src="./images/nba.png" class="work__image" alt="Project 1" style="width: 700px;">
+              <img src="./images/nba.png" class="work__image" alt="NBA Games Database Project" style="width: 700px;" loading="lazy">
             </div>
           </div>
 
@@ -124,7 +631,7 @@
               <ul class="work__list">
                 <li>Python</li>
                 <li>PyTorch</li>
-                <li>Transfromer</li>
+                <li>Transformer</li>
                 <li>Natural Language Processing</li>
               </ul>
               <p>
@@ -132,16 +639,16 @@
               </p>
               <div class="work__links">
                 <h4>Visit Site <span>&rarr;</span></h4>
-                <a href="https://github.com/isi-nlp/s2s-decipherment-datafirst" title="View Source Code" target="_blank">
-                  <img src="./images/github.svg" class="work__code" alt="GitHub">
+                <a href="https://github.com/isi-nlp/s2s-decipherment-datafirst" title="View Source Code" target="_blank" rel="noopener noreferrer">
+                  <img src="./images/github.svg" class="work__code" alt="GitHub" loading="lazy">
                 </a>
-                <a href="https://colab.research.google.com/drive/1zu5-ZjTmT5t-LzDZHpcX9ZLsQDbOc2I4?usp=sharing" title="View Notebook" target="_blank">
-                  <img src="./images/Google_Colaboratory.svg" class="work__code" alt="Google Colab">
+                <a href="https://colab.research.google.com/drive/1zu5-ZjTmT5t-LzDZHpcX9ZLsQDbOc2I4?usp=sharing" title="View Notebook" target="_blank" rel="noopener noreferrer">
+                  <img src="./images/Google_Colaboratory.svg" class="work__code" alt="Google Colab" loading="lazy">
                 </a>
               </div>
             </div>
             <div class="work__image-box">
-              <img src="./images/project2-2.png" class="work__image" alt="Project 2" style="width: 700px;">
+              <img src="./images/project2-2.png" class="work__image" alt="Multilingual Decipherment System Project" style="width: 700px;" loading="lazy">
             </div>
           </div>
 
@@ -165,13 +672,13 @@
               </p>
               <div class="work__links">
                 <h4>Visit Site <span>&rarr;</span></h4>
-                <a href="https://github.com/Atatsuki2000/Stock-Market-and-Layoff-Trend-Analysis" title="View Source Code" target="_blank">
-                  <img src="./images/github.svg" class="work__code" alt="GitHub">
+                <a href="https://github.com/Atatsuki2000/Stock-Market-and-Layoff-Trend-Analysis" title="View Source Code" target="_blank" rel="noopener noreferrer">
+                  <img src="./images/github.svg" class="work__code" alt="GitHub" loading="lazy">
                 </a>
               </div>
             </div>
             <div class="work__image-box">
-              <img src="./images/project3.png" class="work__image" alt="Project 3" />
+              <img src="./images/project3.png" class="work__image" alt="Stock Market Analysis Project" loading="lazy" />
             </div>
           </div>
         </div>
@@ -180,7 +687,6 @@
   </main>
 
   <!-- ***** Contact ***** -->
-
   <section class="contact" id="contact">
     <div class="row">
       <h2>Get in Touch</h2>
@@ -188,37 +694,119 @@
         <p>
           Got any questions? Feel free to reach out to me!
         </p>
-        <!-- Replace the email with yours -->
-        <a href="mailto:you@example.com" class="btn">mingshanlee00@gmail.com</a>
+        <!-- Fixed email link -->
+        <a href="mailto:mingshanlee00@gmail.com" class="btn">mingshanlee00@gmail.com</a>
       </div>
     </div>
   </section>
 
   <!-- ***** Footer ***** -->
-
   <footer role="contentinfo" class="footer">
     <div class="row">
-      <!-- Update the links to point to your accounts -->
-       <p>Or contact me through social media!</p>
+      <p>Or contact me through social media!</p>
       <ul class="footer__social-links">
         <li class="footer__social-link-item">
-          <a href="https://github.com/Atatsuki2000" title="Link to Github Profile">
-            <img src="./images/github.svg" class="footer__social-image" alt="Github">
+          <a href="https://github.com/Atatsuki2000" title="Link to Github Profile" target="_blank" rel="noopener noreferrer">
+            <img src="./images/github.svg" class="footer__social-image" alt="Github" loading="lazy">
           </a>
         </li>
         <li class="footer__social-link-item">
-          <a href="https://www.linkedin.com/in/ming-shan-lee-53a192280/">
-            <img src="./images/linkedin.svg" title="Link to Linkedin Profile" class="footer__social-image" alt="Linkedin">
+          <a href="https://www.linkedin.com/in/ming-shan-lee-53a192280/" title="Link to Linkedin Profile" target="_blank" rel="noopener noreferrer">
+            <img src="./images/linkedin.svg" class="footer__social-image" alt="Linkedin" loading="lazy">
           </a>
         </li>
       </ul>
-
-    
+    </div>
+  </footer>
 
   <a href="#top" class="back-to-top" title="Back to Top">
-    <img src="./images/arrow-up.svg" alt="Back to Top" class="back-to-top__image"/>
+    <img src="./images/arrow-up.svg" alt="Back to Top" class="back-to-top__image" loading="lazy"/>
   </a>
+  
   <script src="./index.js"></script>
+  
+  <!-- Enhanced JavaScript for performance -->
+  <script>
+    // Lazy loading for images
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.classList.add('loaded');
+          observer.unobserve(img);
+        }
+      });
+    });
+    
+    images.forEach(img => {
+      imageObserver.observe(img);
+    });
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+    
+    // Enhanced back-to-top functionality
+    const backToTopButton = document.querySelector(".back-to-top");
+    let isBackToTopRendered = false;
+
+    let alterStyles = (isBackToTopRendered) => {
+      backToTopButton.style.visibility = isBackToTopRendered ? "visible" : "hidden";
+      backToTopButton.style.opacity = isBackToTopRendered ? 1 : 0;
+      backToTopButton.style.transform = isBackToTopRendered ? "scale(1)" : "scale(0)";
+    };
+
+    // Throttle scroll events for better performance
+    let ticking = false;
+    
+    window.addEventListener("scroll", () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          if (window.scrollY > 700) {
+            isBackToTopRendered = true;
+            alterStyles(isBackToTopRendered);
+          } else {
+            isBackToTopRendered = false;
+            alterStyles(isBackToTopRendered);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Animate skill bars when in view
+    const skillBars = document.querySelectorAll('.skill__progress');
+    
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const bar = entry.target;
+          const width = bar.style.width;
+          bar.style.width = '0%';
+          setTimeout(() => {
+            bar.style.width = width;
+          }, 200);
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    skillBars.forEach(bar => {
+      skillObserver.observe(bar);
+    });
+  </script>
 </body>
 
 </html>
