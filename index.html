@@ -19,6 +19,7 @@
   <meta property="og:url" content="https://your-domain.com" />
   
   <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="./components/enhanced-loading.css" />
   
   <!-- Preload critical resources -->
   <link rel="preload" href="./fonts/HKGrotesk-Regular.woff" as="font" type="font/woff" crossorigin />
@@ -439,7 +440,12 @@
             </p>
           </div>
           <div class="about__photo-container">
-            <img class="about__photo" src="./images/profile-photo.jpg" alt="Ming Shan Lee" />
+            <img class="about__photo" 
+                src="./images/profile-photo.jpg" 
+                alt="Ming Shan Lee" 
+                width="300" 
+                height="400"
+                loading="lazy" />
           </div>
         </div>
       </div>
@@ -575,7 +581,8 @@
             <img src="./images/certificate_salesforced_tableau.png" 
                 class="certificate__image" 
                 alt="Salesforced Certified Tableau Desktop Foundations" 
-                style="max-width: 600px;" 
+                width="600" 
+                height="400"
                 loading="lazy" />
           </div>
         </div>
@@ -620,7 +627,8 @@
               <img src="./images/project4.png" 
                   class="work__image" 
                   alt="Hybrid Yelp Rating Predictor Project" 
-                  style="width: 700px;" 
+                  width="700" 
+                  height="400"
                   loading="lazy" />
             </div>
           </div>
@@ -650,7 +658,12 @@
               </div>
             </div>
             <div class="work__image-box">
-              <img src="./images/project_RLHF.png" class="work__image" alt="Project Better-Agent-For-AppWorld" style="width: 700px;height: 800px;" loading="lazy">
+              <img src="./images/project_RLHF.png" 
+                  class="work__image" 
+                  alt="Project Better-Agent-For-AppWorld" 
+                  width="700" 
+                  height="800"
+                  loading="lazy">
             </div>
           </div>
 
@@ -682,7 +695,12 @@
               </div>
             </div>
             <div class="work__image-box">
-              <img src="./images/nba.png" class="work__image" alt="NBA Games Database Project" style="width: 700px;" loading="lazy">
+              <img src="./images/nba.png" 
+                  class="work__image" 
+                  alt="NBA Games Database Project" 
+                  width="700" 
+                  height="400"
+                  loading="lazy">
             </div>
           </div>
 
@@ -712,7 +730,12 @@
               </div>
             </div>
             <div class="work__image-box">
-              <img src="./images/project2-2.png" class="work__image" alt="Multilingual Decipherment System Project" style="width: 700px;" loading="lazy">
+              <img src="./images/project2-2.png" 
+                  class="work__image" 
+                  alt="Multilingual Decipherment System Project" 
+                  width="700" 
+                  height="400"
+                  loading="lazy">
             </div>
           </div>
 
@@ -742,7 +765,12 @@
               </div>
             </div>
             <div class="work__image-box">
-              <img src="./images/project3.png" class="work__image" alt="Stock Market Analysis Project" loading="lazy" />
+              <img src="./images/project3.png" 
+                  class="work__image" 
+                  alt="Stock Market Analysis Project" 
+                  width="700" 
+                  height="400"
+                  loading="lazy" />
             </div>
           </div>
         </div>
@@ -871,6 +899,9 @@
       skillObserver.observe(bar);
     });
   </script>
+  
+  <!-- Enhanced Loading Effects -->
+  <script src="./components/enhanced-loading.js"></script>
 </body>
 
 </html>
