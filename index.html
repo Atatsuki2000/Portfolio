@@ -311,23 +311,68 @@
       }
     }
 
-    /* Skills Section */
-    .skills__content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 3rem;
+    /* Skills Section - Tab Navigation */
+    .skills__tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      flex-wrap: wrap;
     }
 
-    .skills__category h3 {
+    .skills__tab {
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.6);
+      padding: 1.5rem 2.5rem;
+      font-size: 1.6rem;
+      font-weight: 500;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s ease;
+      border-bottom: 3px solid transparent;
+    }
+
+    .skills__tab:hover {
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .skills__tab--active {
       color: var(--pink);
-      margin-bottom: 2rem;
-      font-size: 2.2rem;
+      border-bottom-color: var(--pink);
     }
 
-    .skills__items {
+    .skills__tab-content {
+      min-height: 300px;
+    }
+
+    .skills__panel {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .skills__panel--active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .skills__category {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
     .skill__item {
@@ -356,9 +401,40 @@
       transition: width 0.3s ease;
     }
 
-    /* Improved accessibility */
     .skill__item:hover .skill__progress {
       box-shadow: 0 0 10px rgba(255, 50, 88, 0.5);
+    }
+
+    /* Mobile responsive tabs */
+    @media(max-width: 900px) {
+      .skills__tabs {
+        gap: 0.5rem;
+      }
+
+      .skills__tab {
+        padding: 1.2rem 1.5rem;
+        font-size: 1.4rem;
+      }
+    }
+
+    @media(max-width: 600px) {
+      .skills__tabs {
+        flex-direction: column;
+        border-bottom: none;
+      }
+
+      .skills__tab {
+        width: 100%;
+        text-align: left;
+        border-left: 3px solid transparent;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .skills__tab--active {
+        border-left-color: var(--pink);
+        border-bottom-color: transparent;
+        background: rgba(255, 50, 88, 0.1);
+      }
     }
 
     /* Performance optimization styles */
@@ -366,6 +442,93 @@
       object-fit: contain;
       max-width: 100%;
       height: auto;
+    }
+
+    /* Project Filter Buttons */
+    .work__filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 3rem 0 3rem 0;
+    }
+
+    .work__filter {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      color: var(--white);
+      padding: 1rem 2rem;
+      font-size: 1.4rem;
+      font-weight: 500;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .work__filter:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .work__filter--active {
+      background: linear-gradient(135deg, var(--pink) 0%, #ff4d6d 100%);
+      border-color: var(--pink);
+      box-shadow: 0 4px 15px rgba(255, 50, 88, 0.4);
+    }
+
+    /* Project Box Filtering Animation */
+    .work__box {
+      opacity: 0;
+    }
+
+    .work__box--animating {
+      animation: simpleFade 0.3s ease-in forwards;
+    }
+
+    .work__box--animating:nth-of-type(1) {
+      animation-delay: 0s;
+    }
+
+    .work__box--animating:nth-of-type(2) {
+      animation-delay: 0.06s;
+    }
+
+    .work__box--animating:nth-of-type(3) {
+      animation-delay: 0.12s;
+    }
+
+    .work__box--animating:nth-of-type(4) {
+      animation-delay: 0.18s;
+    }
+
+    .work__box--animating:nth-of-type(5) {
+      animation-delay: 0.24s;
+    }
+
+    .work__box--hidden {
+      display: none;
+    }
+
+    @keyframes simpleFade {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @media(max-width: 600px) {
+      .work__filters {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .work__filter {
+        width: 100%;
+        text-align: center;
+      }
     }
 
     /* Lazy loading placeholder */
@@ -455,63 +618,83 @@
     <section class="skills" id="skills">
       <div class="row">
         <h2>Technical Skills</h2>
-        <div class="skills__content">
-          
-          <div class="skills__category">
-            <h3>Programming Languages</h3>
-            <div class="skill__item">
-              <span class="skill__name">Python</span>
-              <div class="skill__bar">
-                <div class="skill__progress" style="width: 95%"></div> <!-- Keep high - extensive use -->
+
+        <!-- Tab Navigation -->
+        <div class="skills__tabs">
+          <button class="skills__tab skills__tab--active" data-tab="languages">
+            Programming Languages
+          </button>
+          <button class="skills__tab" data-tab="data-science">
+            Data Science & ML
+          </button>
+          <button class="skills__tab" data-tab="cloud">
+            Cloud & Platforms
+          </button>
+          <button class="skills__tab" data-tab="ai">
+            AI & Advanced ML
+          </button>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="skills__tab-content">
+
+          <!-- Programming Languages Tab -->
+          <div class="skills__panel skills__panel--active" data-panel="languages">
+            <div class="skills__category">
+              <div class="skill__item">
+                <span class="skill__name">Python</span>
+                <div class="skill__bar">
+                  <div class="skill__progress" style="width: 95%"></div>
+                </div>
               </div>
-            </div>
-            <div class="skill__item">
-              <span class="skill__name">SQL</span>
-              <div class="skill__bar">
-                <div class="skill__progress" style="width: 90%"></div> <!-- High - production experience -->
+              <div class="skill__item">
+                <span class="skill__name">SQL</span>
+                <div class="skill__bar">
+                  <div class="skill__progress" style="width: 90%"></div>
+                </div>
               </div>
-            </div>
-            <div class="skill__item">
-              <span class="skill__name">JavaScript</span>
-              <div class="skill__bar">
-                <div class="skill__progress" style="width: 75%"></div> <!-- Reduced - limited to web projects -->
+              <div class="skill__item">
+                <span class="skill__name">JavaScript</span>
+                <div class="skill__bar">
+                  <div class="skill__progress" style="width: 75%"></div>
+                </div>
               </div>
-            </div>
-            <div class="skill__item">
-              <span class="skill__name">HTML/CSS</span>
-              <div class="skill__bar">
-                <div class="skill__progress" style="width: 80%"></div> <!-- Moderate - web development -->
+              <div class="skill__item">
+                <span class="skill__name">HTML/CSS</span>
+                <div class="skill__bar">
+                  <div class="skill__progress" style="width: 80%"></div>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="skills__category">
-            <h3>Data Science & ML</h3>
-            <div class="skills__items">
+          <!-- Data Science & ML Tab -->
+          <div class="skills__panel" data-panel="data-science">
+            <div class="skills__category">
               <div class="skill__item">
                 <span class="skill__name">Scikit-learn</span>
                 <div class="skill__bar">
-                  <div class="skill__progress" style="width: 92%"></div> <!-- High - production use -->
+                  <div class="skill__progress" style="width: 92%"></div>
                 </div>
               </div>
               <div class="skill__item">
                 <span class="skill__name">Pandas & NumPy</span>
                 <div class="skill__bar">
-                  <div class="skill__progress" style="width: 95%"></div> <!-- Very high - extensive use -->
+                  <div class="skill__progress" style="width: 95%"></div>
                 </div>
               </div>
               <div class="skill__item">
                 <span class="skill__name">PySpark</span>
                 <div class="skill__bar">
-                  <div class="skill__progress" style="width: 85%"></div> <!-- Add from resume -->
+                  <div class="skill__progress" style="width: 85%"></div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="skills__category">
-            <h3>Cloud & Data Platforms</h3>
-            <div class="skills__items">
+          <!-- Cloud & Data Platforms Tab -->
+          <div class="skills__panel" data-panel="cloud">
+            <div class="skills__category">
               <div class="skill__item">
                 <span class="skill__name">Google Cloud Platform</span>
                 <div class="skill__bar">
@@ -539,26 +722,25 @@
             </div>
           </div>
 
-
-          <div class="skills__category">
-            <h3>AI & Advanced ML</h3>
-            <div class="skills__items">
+          <!-- AI & Advanced ML Tab -->
+          <div class="skills__panel" data-panel="ai">
+            <div class="skills__category">
               <div class="skill__item">
                 <span class="skill__name">Large Language Models</span>
                 <div class="skill__bar">
-                  <div class="skill__progress" style="width: 85%"></div> <!-- High - recent AppWorld project -->
+                  <div class="skill__progress" style="width: 85%"></div>
                 </div>
               </div>
               <div class="skill__item">
                 <span class="skill__name">Machine Learning</span>
                 <div class="skill__bar">
-                  <div class="skill__progress" style="width: 92%"></div> <!-- Very high - production deployment -->
+                  <div class="skill__progress" style="width: 92%"></div>
                 </div>
               </div>
               <div class="skill__item">
                 <span class="skill__name">Reinforcement Learning</span>
                 <div class="skill__bar">
-                  <div class="skill__progress" style="width: 80%"></div> <!-- Good - AppWorld project -->
+                  <div class="skill__progress" style="width: 80%"></div>
                 </div>
               </div>
             </div>
@@ -593,9 +775,19 @@
     <section class="work" id="work">
       <div class="row">
         <h2>My Projects</h2>
+
+        <!-- Filter Buttons -->
+        <div class="work__filters">
+          <button class="work__filter work__filter--active" data-filter="all">All Projects</button>
+          <button class="work__filter" data-filter="machine-learning">Machine Learning</button>
+          <button class="work__filter" data-filter="deep-learning">Deep Learning</button>
+          <button class="work__filter" data-filter="web-dev">Web Development</button>
+          <button class="work__filter" data-filter="data-analysis">Data Analysis</button>
+        </div>
+
         <div class="work__boxes">
           
-          <div class="work__box">
+          <div class="work__box" data-category="machine-learning data-analysis">
             <div class="work__text">
               <h3>Hybrid Yelp Rating Predictor</h3>
               <p>
@@ -633,7 +825,7 @@
             </div>
           </div>
 
-          <div class="work__box">
+          <div class="work__box" data-category="deep-learning machine-learning">
             <div class="work__text">
               <h3>Better Agent for AppWorld</h3>
               <p>
@@ -667,7 +859,7 @@
             </div>
           </div>
 
-          <div class="work__box">
+          <div class="work__box" data-category="web-dev data-analysis">
             <div class="work__text">
               <h3>NBA Games Real Time Database</h3>
               <p>
@@ -704,7 +896,7 @@
             </div>
           </div>
 
-          <div class="work__box">
+          <div class="work__box" data-category="deep-learning machine-learning">
             <div class="work__text">
               <h3>Build a Multilingual Decipherment System</h3>
               <p>
@@ -739,7 +931,7 @@
             </div>
           </div>
 
-          <div class="work__box">
+          <div class="work__box" data-category="data-analysis">
             <div class="work__text">
               <h3>Stock Market and Layoff Trend Analysis</h3>
               <p>
@@ -816,90 +1008,7 @@
   </a>
   
   <script src="./index.js"></script>
-  
-  <!-- Enhanced JavaScript for performance -->
-  <script>
-    // Lazy loading for images
-    const images = document.querySelectorAll('img[loading="lazy"]');
-    
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.classList.add('loaded');
-          observer.unobserve(img);
-        }
-      });
-    });
-    
-    images.forEach(img => {
-      imageObserver.observe(img);
-    });
-    
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-    
-    // Enhanced back-to-top functionality
-    const backToTopButton = document.querySelector(".back-to-top");
-    let isBackToTopRendered = false;
 
-    let alterStyles = (isBackToTopRendered) => {
-      backToTopButton.style.visibility = isBackToTopRendered ? "visible" : "hidden";
-      backToTopButton.style.opacity = isBackToTopRendered ? 1 : 0;
-      backToTopButton.style.transform = isBackToTopRendered ? "scale(1)" : "scale(0)";
-    };
-
-    // Throttle scroll events for better performance
-    let ticking = false;
-    
-    window.addEventListener("scroll", () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          if (window.scrollY > 700) {
-            isBackToTopRendered = true;
-            alterStyles(isBackToTopRendered);
-          } else {
-            isBackToTopRendered = false;
-            alterStyles(isBackToTopRendered);
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
-
-    // Animate skill bars when in view
-    const skillBars = document.querySelectorAll('.skill__progress');
-    
-    const skillObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const bar = entry.target;
-          const width = bar.style.width;
-          bar.style.width = '0%';
-          setTimeout(() => {
-            bar.style.width = width;
-          }, 200);
-        }
-      });
-    }, { threshold: 0.5 });
-    
-    skillBars.forEach(bar => {
-      skillObserver.observe(bar);
-    });
-  </script>
-  
   <!-- Enhanced Loading Effects -->
   <script src="./components/enhanced-loading.js"></script>
 </body>

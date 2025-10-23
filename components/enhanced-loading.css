@@ -45,7 +45,8 @@
 }
 
 /* Simple section animations - higher specificity to override main CSS */
-.work__box {
+/* Disabled for work__box - handled by filter animations in index.js */
+/* .work__box {
   opacity: 0 !important;
   transform: translateY(20px);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -54,7 +55,7 @@
 .work__box.fade-in {
   opacity: 1 !important;
   transform: translateY(0);
-}
+} */
 
 /* Simple image error state */
 img.error {

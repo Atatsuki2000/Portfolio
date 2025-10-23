@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Enhanced section-based lazy loading with staggered animations
   function setupSectionLazyLoading() {
-    const sections = document.querySelectorAll('.work__box, .about, .certificates');
+    const sections = document.querySelectorAll('.about, .certificates');
     
     const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry, index) => {
@@ -101,12 +101,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: true }); // Passive for better performance
   }
   
-  // Initialize sections to be hidden initially
-  const workBoxes = document.querySelectorAll('.work__box');
-  workBoxes.forEach(box => {
-    box.style.opacity = '0';
-    box.style.transform = 'translateY(20px)';
-  });
+  // Initialize sections to be hidden initially (excluding work__box - handled by filter animation)
+  // const workBoxes = document.querySelectorAll('.work__box');
+  // workBoxes.forEach(box => {
+  //   box.style.opacity = '0';
+  //   box.style.transform = 'translateY(20px)';
+  // });
   
   // Initialize clean enhancements
   const imageObserver = setupCleanLazyLoading();
