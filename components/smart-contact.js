@@ -22,7 +22,6 @@ class SmartContact {
 
   setup() {
     this.createForm();
-    this.trackEngagement();
   }
 
   createForm() {
@@ -36,6 +35,9 @@ class SmartContact {
       <p>Got any questions? Fill out the form below and I'll get back to you as soon as possible!</p>
       
       <form class="smart-contact-form" id="contact-form">
+        <!-- Honeypot field for spam detection (hidden from real users) -->
+        <input type="text" name="website" id="website-field" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" autocomplete="off" />
+        
         <div class="form-group">
           <label for="contact-name">
             Your Name <span class="required">*</span>
@@ -224,12 +226,71 @@ class SmartContact {
     if (suggestions[subject] && !messageInput.value) {
       messageInput.placeholder = suggestions[subject] + '...';
     }
+    
+    // Show contextual tips based on subject
+    this.showSmartTip(subject);
+  }
+
+  showSmartTip(subject) {
+    const tips = {
+      'job': '💡 Tip: Mention your timeline and what role interests you most',
+      'collaboration': '💡 Tip: Describe your project and how we could work together',
+      'consulting': '💡 Tip: Share your challenge and desired outcomes',
+      'question': '💡 Tip: Be specific about what you\'d like to know',
+      'other': '💡 Tip: Feel free to share whatever\'s on your mind'
+    };
+
+    let tipElement = document.querySelector('.smart-tip');
+    if (!tipElement) {
+      tipElement = document.createElement('div');
+      tipElement.className = 'smart-tip';
+      const messageGroup = document.getElementById('contact-message').closest('.form-group');
+      messageGroup.insertBefore(tipElement, messageGroup.querySelector('.form-message-info'));
+    }
+
+    if (tips[subject]) {
+      tipElement.textContent = tips[subject];
+      tipElement.style.display = 'block';
+      setTimeout(() => tipElement.classList.add('visible'), 10);
+    } else {
+      tipElement.style.display = 'none';
+      tipElement.classList.remove('visible');
+    }
+  }
+
+  generateAISuggestions(message) {
+    // AI-powered message suggestions based on keywords
+    const keywords = {
+      'machine learning': ['What ML frameworks do you specialize in?', 'Do you have experience with model deployment?'],
+      'data': ['What kind of data analysis do you offer?', 'Can you help with data visualization?'],
+      'project': ['What\'s your typical project timeline?', 'Do you work remotely or on-site?'],
+      'hire': ['What\'s your availability?', 'Do you offer contract or full-time positions?'],
+      'consulting': ['What\'s your consulting rate?', 'Do you offer package deals?']
+    };
+
+    const lowerMessage = message.toLowerCase();
+    for (const [keyword, suggestions] of Object.entries(keywords)) {
+      if (lowerMessage.includes(keyword)) {
+        return suggestions;
+      }
+    }
+    return [];
   }
 
   async handleSubmit(e) {
     e.preventDefault();
     
     if (this.isSubmitting) return;
+
+    // Spam detection: Check honeypot field
+    const honeypot = document.getElementById('website-field');
+    if (honeypot && honeypot.value) {
+      // Silently reject spam
+      console.log('🚫 Spam detected');
+      this.showStatus('✅ Message sent! I\'ll get back to you soon.', 'success');
+      this.form.reset();
+      return;
+    }
 
     // Validate all fields
     const inputs = this.form.querySelectorAll('.form-input');
@@ -276,14 +337,31 @@ Date: ${new Date().toLocaleString()}`;
     // Create mailto link and open email client
     const mailtoLink = `mailto:mingshanlee00@gmail.com?subject=${encodeURIComponent(subjectText)}&body=${encodeURIComponent(emailBody)}`;
     
-    // Store submission for tracking
-    this.trackSubmission('email_opened');
-    
     // Open email client
     window.location.href = mailtoLink;
     
-    // Show success message
-    this.showStatus('✅ Opening your email client... Please send the pre-filled email.', 'success');
+    // Show personalized auto-confirmation message
+    const firstName = name.split(' ')[0];
+    const confirmationMessages = {
+      'job': `Thanks, ${firstName}! 🎯 I'll review your opportunity and get back to you within 24 hours.`,
+      'collaboration': `Exciting, ${firstName}! 🤝 I'm looking forward to exploring this collaboration with you.`,
+      'consulting': `Perfect, ${firstName}! 💡 I'll reach out soon to discuss your consulting needs.`,
+      'question': `Got it, ${firstName}! ❓ I'll answer your question as soon as possible.`,
+      'other': `Thanks for reaching out, ${firstName}! 📧 I'll get back to you shortly.`
+    };
+    
+    const confirmationMessage = confirmationMessages[subjectValue] || `Thanks, ${firstName}! I'll get back to you soon.`;
+    this.showStatus(`✅ Opening your email client... ${confirmationMessage}`, 'success');
+    
+    // Track routing (which "team" would handle this)
+    const routing = {
+      'job': 'Recruitment Team',
+      'collaboration': 'Partnerships Team',
+      'consulting': 'Consulting Team',
+      'question': 'General Support',
+      'other': 'General Support'
+    };
+    console.log(`📮 Message routed to: ${routing[subjectValue]}`);
     
     // Reset form after a short delay
     setTimeout(() => {
@@ -331,36 +409,7 @@ Date: ${new Date().toLocaleString()}`;
     }
   }
 
-  trackEngagement() {
-    // Track when user focuses on the form
-    if (this.form) {
-      const inputs = this.form.querySelectorAll('.form-input');
-      let hasInteracted = false;
 
-      inputs.forEach(input => {
-        input.addEventListener('focus', () => {
-          if (!hasInteracted) {
-            hasInteracted = true;
-            this.trackEvent('form_interaction_start');
-          }
-        });
-      });
-    }
-  }
-
-  trackSubmission(status) {
-    const stats = JSON.parse(localStorage.getItem('contact_stats') || '{}');
-    stats.submissions = (stats.submissions || 0) + 1;
-    stats.lastSubmission = new Date().toISOString();
-    stats.status = status;
-    localStorage.setItem('contact_stats', JSON.stringify(stats));
-  }
-
-  trackEvent(eventName) {
-    console.log(`📊 Event tracked: ${eventName}`);
-    // In production, send to analytics (Google Analytics, Mixpanel, etc.)
-    // gtag('event', eventName, { category: 'contact_form' });
-  }
 }
 
 // Initialize Smart Contact Form
